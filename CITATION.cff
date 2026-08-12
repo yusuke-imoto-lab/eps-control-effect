@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite both the software and the paper."
+title: "epscontrol: control effect functions and multi-parameter persistence"
+version: 0.2.0
+license: MIT
+repository-code: "https://github.com/yusuke-imoto-lab/eps-control-effect"
+authors:
+  - family-names: Imoto
+    given-names: Yusuke
+    affiliation: "Institute for the Advanced Study of Human Biology, Kyoto University"
+    email: imoto.yusuke.4e@kyoto-u.ac.jp
+  - family-names: Yokoyama
+    given-names: Tomoo
+    affiliation: "Department of Mathematics, Faculty of Science, Saitama University"
+    email: tyokoyama@rimath.saitama-u.ac.jp
+preferred-citation:
+  type: article
+  title: "Multi-parameter persistence in dynamical systems for maximizing effects of control inputs"
+  authors:
+    - family-names: Imoto
+      given-names: Yusuke
+    - family-names: Yokoyama
+      given-names: Tomoo

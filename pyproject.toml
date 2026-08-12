@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "epscontrol"
+version = "0.2.0"
+description = "Control effect functions and multi-parameter persistence for maximizing effects of control inputs"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Yusuke Imoto", email = "imoto.yusuke.4e@kyoto-u.ac.jp" },
+    { name = "Tomoo Yokoyama", email = "tyokoyama@rimath.saitama-u.ac.jp" },
+]
+keywords = [
+    "topological data analysis",
+    "multi-parameter persistence",
+    "dynamical systems",
+    "optimal control",
+    "ensemble forecast",
+    "filtration",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Scientific/Engineering :: Physics",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=1.22",
+    "pandas>=1.4",
+    "scipy>=1.8",
+    "scikit-learn>=1.0",
+    "matplotlib>=3.5",
+    "anndata>=0.9",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+docs = ["jupyter", "nbformat"]
+
+[project.urls]
+Homepage = "https://github.com/yusuke-imoto-lab/eps-control-effect"
+Repository = "https://github.com/yusuke-imoto-lab/eps-control-effect"
+Issues = "https://github.com/yusuke-imoto-lab/eps-control-effect/issues"
+
+[tool.hatch.build.targets.sdist]
+include = ["epscontrol", "tests", "examples", "README.md", "CHANGELOG.md", "LICENSE", "CITATION.cff"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["epscontrol"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --doctest-modules --ignore=examples"
+filterwarnings = ["error::RuntimeWarning"]

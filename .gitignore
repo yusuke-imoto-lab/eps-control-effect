@@ -1,0 +1,12 @@
+*~
+*.py[cod]
+__pycache__/
+.DS_Store
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+build/
+dist/
+*.egg-info/
+examples/*.png
+_view_*.png
