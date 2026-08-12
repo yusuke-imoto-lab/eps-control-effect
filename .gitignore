@@ -11,3 +11,4 @@ dist/
 examples/*.png
 _view_*.png
 .pypirc
+.venv*/

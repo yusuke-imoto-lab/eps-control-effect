@@ -55,7 +55,25 @@ Repository = "https://github.com/yusuke-imoto-lab/eps-control-effect"
 Issues = "https://github.com/yusuke-imoto-lab/eps-control-effect/issues"
 
 [tool.hatch.build.targets.sdist]
-include = ["epscontrol", "tests", "examples", "README.md", "CHANGELOG.md", "LICENSE", "CITATION.cff"]
+# Explicit globs, not bare directory names: a bare name is matched loosely and
+# has pulled in build-time virtualenvs (.venv, .venv-1) in the past.
+include = [
+    "/epscontrol/**/*.py",
+    "/tests/*.py",
+    "/examples/*.ipynb",
+    "/README.md",
+    "/CHANGELOG.md",
+    "/LICENSE",
+    "/CITATION.cff",
+    "/pyproject.toml",
+]
+exclude = [
+    "**/.venv*",
+    "**/__pycache__",
+    "**/*.py[cod]",
+    "**/.ipynb_checkpoints",
+    "**/.pytest_cache",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["epscontrol"]
