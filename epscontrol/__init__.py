@@ -3,7 +3,8 @@ r"""Control effect functions and multi-parameter persistence for ensembles.
 ``epscontrol`` implements the constructions of
 
     Y. Imoto and T. Yokoyama, *Multi-parameter persistence in dynamical systems
-    for maximizing effects of control inputs*.
+    for maximizing effects of control inputs*, arXiv:2606.05577 (2026),
+    https://doi.org/10.48550/arXiv.2606.05577.
 
 Given an ensemble of time series and an evaluation function defined only at the
 terminal time of each member, the library extends that partial function to the

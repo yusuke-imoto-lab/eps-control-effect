@@ -3,7 +3,8 @@ r"""Core solvers for control effect functions on a finite state space.
 Implements the constructions of
 
     Y. Imoto and T. Yokoyama, *Multi-parameter persistence in dynamical
-    systems for maximizing effects of control inputs*.
+    systems for maximizing effects of control inputs*, arXiv:2606.05577
+    (2026), https://doi.org/10.48550/arXiv.2606.05577.
 
 Setting
 -------

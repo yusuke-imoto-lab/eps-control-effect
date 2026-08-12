@@ -3,7 +3,7 @@
 > Tools for computing and visualizing the **$\varepsilon$-control effect function**
 > $h_f^{\varepsilon\text{-}\ell^p}$ and its three-parameter filtration, as introduced in
 > *Multi-parameter persistence in dynamical systems for maximizing effects of control inputs*,
-> Y. Imoto and T. Yokoyama.
+> Y. Imoto and T. Yokoyama, [arXiv:2606.05577](https://arxiv.org/abs/2606.05577).
 
 ---
 
@@ -303,7 +303,21 @@ pip install -r requirements.txt
 
 If you use this software, please cite the paper:
 
-> Y. Imoto and T. Yokoyama, *Multi-parameter persistence in dynamical systems for maximizing effects of control inputs*.
+> Y. Imoto and T. Yokoyama, *Multi-parameter persistence in dynamical systems for maximizing effects of control inputs*, arXiv:2606.05577 (2026). [doi:10.48550/arXiv.2606.05577](https://doi.org/10.48550/arXiv.2606.05577)
+
+```bibtex
+@article{imoto2026multiparameter,
+  title  = {Multi-parameter persistence in dynamical systems for maximizing
+            effects of control inputs},
+  author = {Imoto, Yusuke and Yokoyama, Tomoo},
+  year   = {2026},
+  eprint = {2606.05577},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.DS},
+  doi    = {10.48550/arXiv.2606.05577},
+  url    = {https://arxiv.org/abs/2606.05577}
+}
+```
 
 and, for the underlying $\varepsilon$-attracting-basin framework:
 

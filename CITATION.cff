@@ -21,3 +21,8 @@ preferred-citation:
       given-names: Yusuke
     - family-names: Yokoyama
       given-names: Tomoo
+  year: 2026
+  month: 6
+  doi: 10.48550/arXiv.2606.05577
+  url: "https://arxiv.org/abs/2606.05577"
+  notes: "arXiv:2606.05577 [math.DS]"

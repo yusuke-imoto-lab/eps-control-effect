@@ -10,3 +10,4 @@ dist/
 *.egg-info/
 examples/*.png
 _view_*.png
+.pypirc
