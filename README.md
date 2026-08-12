@@ -74,7 +74,7 @@ The interface takes an [`anndata`](https://anndata.readthedocs.io/) object whose
 | `.uns` | `cost_matrix` | optional precomputed cost matrix $c$, `n_obs × n_obs`; built from `.X` if absent |
 | `.obsm` | `plot_data` | optional 2-D coordinates for plotting instead of `.X` |
 
-The dynamical system is the shift along each member, $f(y^{(i)}_t) = y^{(i)}_{t+1}$, so $\operatorname{dom} f$ is every non-terminal point and $\operatorname{dom} h$ every terminal point. This realizes the paper's hypothesis $X = \operatorname{dom} f \sqcup \operatorname{dom} h = \bigsqcup_{n\ge0} f^{-n}(\operatorname{dom} h)$; `check_hypotheses` reports it.
+The dynamical system is the shift along each member, $f(y^{(i)}_t) = y^{(i)}_{t+1}$, so $\mathrm{dom} f$ is every non-terminal point and $\mathrm{dom} h$ every terminal point. This realizes the paper's hypothesis $X = \mathrm{dom} f \sqcup \mathrm{dom} h = \bigsqcup_{n\ge0} f^{-n}(\mathrm{dom} h)$; `check_hypotheses` reports it.
 
 The default cost is Euclidean **within a time layer** and $\infty$ across layers, so a control input may switch between ensemble members observed at the same time. Pass `time_aligned=False`, `metric=...`, a callable `cost=...`, or a precomputed `adata.uns["cost_matrix"]` to change it.
 
@@ -177,7 +177,7 @@ For $x = (0, 6)^{\mathsf T}$ of the paper's example the library reproduces Examp
   Assemble a `ControlProblem` $(X, f, c, h, p)$ from an AnnData object, preserving row order. Pass the result as `problem=` to the analysis functions to avoid re-solving.
 
 - **`check_hypotheses(adata, *, eps=0.0, p=np.inf, problem=None, **kwargs)`**
-  Report the paper's structural hypotheses: $\operatorname{dom} f \cap \operatorname{dom} h = \emptyset$, $X = \operatorname{dom} f \sqcup \operatorname{dom} h$, $X = \bigsqcup_n f^{-n}(\operatorname{dom} h)$, and $\operatorname{dom} h \subseteq E_c(\varepsilon) \setminus \operatorname{dom} f$.
+  Report the paper's structural hypotheses: $\mathrm{dom} f \cap \mathrm{dom} h = \emptyset$, $X = \mathrm{dom} f \sqcup \mathrm{dom} h$, $X = \bigsqcup_n f^{-n}(\mathrm{dom} h)$, and $\mathrm{dom} h \subseteq E_c(\varepsilon) \setminus \mathrm{dom} f$.
 
 ### Effect functions
 
@@ -192,7 +192,7 @@ For $x = (0, 6)^{\mathsf T}$ of the paper's example the library reproduces Examp
 
 ### Reachability and paths
 
-- **`reachable_range(adata, x, eps, ...)`** — the range $R^{\ell^p}_{h,f}(\varepsilon, x) = h([x]^{\varepsilon\text{-}\ell^p}_f \cap \operatorname{dom} h)$.
+- **`reachable_range(adata, x, eps, ...)`** — the range $R^{\ell^p}_{h,f}(\varepsilon, x) = h([x]^{\varepsilon\text{-}\ell^p}_f \cap \mathrm{dom} h)$.
 - **`reachable_domain(adata, eps, r, ...)`** — the domain $D^{\ell^p}_{h,f}(\varepsilon, r)$ as a boolean mask.
 - **`minimizing_path(adata, x, eps, ...)`** — a minimizing $\varepsilon$-$\ell^p$-controlled path (Theorem 3.12), returning the visited states $N(\gamma)$, the jump targets, the individual control magnitudes, the residual budget at each state, and the terminal value.
 
@@ -226,7 +226,7 @@ All plotting functions return `(fig, ax)` and never call `plt.show`, so panels c
 **Chaotic competition with a regime shift** (see the ecology tutorial):
 
 - **`datasets.chaotic_competition(*, n_members=60, t_switch=500.0, t_max=700.0, burn_in=500.0, obs_interval=5.0, embedding_dim=3, embedding_lag=1, noise=0.005, seed=0, observed_species=0, A_post=None, snap_tol=0.02)`**
-  An ensemble of chaotic four-species competition trajectories that undergo a regime shift at `t_switch` and settle into alternative stable states. Only `observed_species` is observed, at interval `obs_interval`, and the state is reconstructed by delay-coordinate embedding — so the evaluation function is genuinely partial and the observable genuinely low-dimensional. `A_post` selects the post-shift regime and therefore how many values $\operatorname{Im} h$ has. Terminal abundances are snapped to the exact equilibria so that each alternative stable state contributes one level rather than numerical duplicates.
+  An ensemble of chaotic four-species competition trajectories that undergo a regime shift at `t_switch` and settle into alternative stable states. Only `observed_species` is observed, at interval `obs_interval`, and the state is reconstructed by delay-coordinate embedding — so the evaluation function is genuinely partial and the observable genuinely low-dimensional. `A_post` selects the post-shift regime and therefore how many values $\mathrm{Im} h$ has. Terminal abundances are snapped to the exact equilibria so that each alternative stable state contributes one level rather than numerical duplicates.
 
 - **`datasets.simulate_competition(x0, *, A=None, A_post=None, t_switch=inf, t_max=700.0, dt=0.02, sample_every=1.0, r=None)`**
   Integrate the competitive Lotka–Volterra system, for one state or a whole ensemble at once, with an optional switch of the interaction matrix at `t_switch`. Leave `t_switch` at its default to get the pure chaotic attractor.
@@ -246,19 +246,19 @@ All plotting functions return `(fig, ax)` and never call `plt.show`, so panels c
 
 ## Mathematical Background
 
-An $\varepsilon$-$\ell^p$-**controlled path** of length $n$ from an initial state $x$ to a terminal state $f(x_{n-1})$ is a sequence $(x; x_0, \dots, x_{n-1}; f(x_{n-1}))$ with $x_i \in \operatorname{dom} f$ and
+An $\varepsilon$-$\ell^p$-**controlled path** of length $n$ from an initial state $x$ to a terminal state $f(x_{n-1})$ is a sequence $(x; x_0, \dots, x_{n-1}; f(x_{n-1}))$ with $x_i \in \mathrm{dom} f$ and
 
 $$\varepsilon_0 = c(x, x_0), \qquad \varepsilon_i = c(f(x_{i-1}), x_i), \qquad \varepsilon \ge \\| (\varepsilon_i)_{i=0}^{n-1} \\|_p ,$$
 
 i.e. each step is one control jump followed by one application of the dynamics (Definition 7). Writing $[x]^{\varepsilon\text{-}\ell^p}_f$ for the set of states so reachable from $x$, the $\varepsilon$-control effect function is
 
-$$h_f^{\varepsilon\text{-}\ell^p}(x) = \inf h\bigl([x]^{\varepsilon\text{-}\ell^p}_f \cap \operatorname{dom} h\bigr),$$
+$$h_f^{\varepsilon\text{-}\ell^p}(x) = \inf h\bigl([x]^{\varepsilon\text{-}\ell^p}_f \cap \mathrm{dom} h\bigr),$$
 
 with the convention $\inf \emptyset = \infty$ (Definition 13), and its $-\varepsilon$ counterpart takes the supremum (Definition 14). Both are monotone: weakly decreasing in $\varepsilon$ (Lemma 3.7) and, on the branch $\varepsilon \ge 0$, weakly decreasing in $p$ (Lemma 3.9), which is what makes the sublevel sets a filtration in all three parameters.
 
 The library computes, once per problem, the array of exact-level control costs
 
-$$C_{\text{exact}}(x, r) = \inf \\{ \varepsilon \mid x \overset{\exists}{\rightharpoonup}_{f,\varepsilon\text{-}\ell^p} h^{-1}(r) \\}, \qquad r \in \operatorname{Im} h,$$
+$$C_{\text{exact}}(x, r) = \inf \\{ \varepsilon \mid x \overset{\exists}{\rightharpoonup}_{f,\varepsilon\text{-}\ell^p} h^{-1}(r) \\}, \qquad r \in \mathrm{Im} h,$$
 
 from which every quantity above is a lookup: $h_f^{\varepsilon\text{-}\ell^p}(x) = \min \\{ r \mid C_{\text{exact}}(x, r) \le \varepsilon \\}$ and $h_f^{-\varepsilon\text{-}\ell^p}(x) = \max \\{ r \mid C_{\text{exact}}(x, r) \le \varepsilon \\}$. This is the recursion of Theorems 4.1 and 4.2 read level by level, and it returns exact values with no discretization of $\varepsilon$.
 
@@ -272,7 +272,7 @@ from which every quantity above is a lookup: $h_f^{\varepsilon\text{-}\ell^p}(x)
 
   <div style="text-align:left"><img style="width:100%; height:auto" src="images/control_window.png"/></div>
 
-  The final section swaps in `competition_matrix_post3`, a post-shift regime with **three** alternative stable states, so $\operatorname{Im} h$ has three values and the question becomes graded: not *can the good outcome be saved*, but *how good an outcome is still affordable*. The tiers close at different times, the strictest first.
+  The final section swaps in `competition_matrix_post3`, a post-shift regime with **three** alternative stable states, so $\mathrm{Im} h$ has three values and the question becomes graded: not *can the good outcome be saved*, but *how good an outcome is still affordable*. The tiers close at different times, the strictest first.
 
   <div style="text-align:left"><img style="width:100%; height:auto" src="images/outcome_tiers.png"/></div>
 
